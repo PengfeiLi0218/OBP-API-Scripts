@@ -86,6 +86,9 @@ $ python run\PostCounterpartyScript.py
 
 make sure your admin account have the roles below: 
 CanCreateCustomer or CanCreateCustomerAtAnyBank
+CanCreateCustomer and CanCreateUserCustomerLink 
+CanCreateCustomerAtAnyBank and CanCreateUserCustomerLinkAtAnyBank
+CanGetAnyUser
 ```bash
 $ python run\PostCustomerScript.py
 ```
