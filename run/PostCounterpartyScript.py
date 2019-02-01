@@ -47,11 +47,11 @@ if __name__ == "__main__":
                     if logoUrl.startswith("http") and other_accounts['metadata']['image_URL'] is None:
                         json_tmp = {"image_URL": logoUrl}
                         url = settings.API_HOST + "/obp/v3.1.0/banks/" + bank_id + "/accounts/" + account_id + "/" + view['id'] + "/other_accounts/"+other_accounts['id']+"/metadata/image_url"
-                        result = session.request('POST', url, json = json_tmp, verify=False)
+                        result = session.request('POST', url, json = json_tmp, verify=settings.VERIFY)
                         if result.status_code == 201:
                             print("Saved " + logoUrl + " as imageURL for counterparty "+ other_accounts['id'])
                         else:
-                            print("Save failed. {}".format(result.error))
+                            print("Save failed. {}".format(result.error if result is not None and result.error is not None else ""))
                     else:
                         print("did NOT save " + logoUrl + " as imageURL for counterparty "+ other_accounts['id'])
 
@@ -59,11 +59,11 @@ if __name__ == "__main__":
                         json_tmp = {"URL": cp['homePageUrl']}
                         url = settings.API_HOST + "/obp/v3.1.0/banks/" + bank_id + "/accounts/" + account_id + "/" + \
                               view['id'] + "/other_accounts/" + other_accounts['id'] + "/metadata/url"
-                        result = session.request('POST', url, json=json_tmp, verify=False)
+                        result = session.request('POST', url, json=json_tmp, verify=settings.VERIFY)
                         if result.status_code == 201:
                             print("Saved " + cp['homePageUrl'] + " as URL for counterparty "+ other_accounts['id'])
                         else:
-                            print("Save failed. {}".format(result.error))
+                            print("Save failed. {}".format(result.error if result is not None and result.error is not None else ""))
                     else:
                         print("did NOT save " + cp['homePageUrl'] + " as URL for counterparty "+ other_accounts['id'])
 
@@ -73,12 +73,15 @@ if __name__ == "__main__":
 
                         json_tmp = {"more_info": moreInfo}
                         url = settings.API_HOST + "/obp/v3.1.0/banks/" + bank_id + "/accounts/" + account_id + "/" + view['id'] + "/other_accounts/" + other_accounts['id'] + "/metadata/more_info"
-                        result = session.request('POST', url, json=json_tmp, verify=False)
+                        result = session.request('POST', url, json=json_tmp, verify=settings.VERIFY)
                         if result.status_code==201:
                             print("Saved " + moreInfo + " as more_info for counterparty "+ other_accounts['id'])
                         else:
-                            print("Save failed. {}".format(result.error))
+                            print("Save failed. {}".format(result.error if result is not None and result.error is not None else ""))
                     else:
-                        print("did NOT save more_info for counterparty "+ other_accounts['id'])
+                        if other_accounts['metadata']['more_info'] is not None:
+                            print("more info is not empty:{}")
+                        else:
+                            print("did NOT save more_info for counterparty "+ other_accounts['id'])
 
         user.oauth_logout()

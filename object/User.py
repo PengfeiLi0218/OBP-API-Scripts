@@ -26,7 +26,7 @@ class User:
         )
 
         url = settings.API_HOST + settings.OAUTH_TOKEN_PATH
-        response = session.fetch_request_token(url, verify=False)
+        response = session.fetch_request_token(url, verify=settings.VERIFY)
 
         self.oauth_token = response.get('oauth_token')
         self.oauth_secret = response.get('oauth_token_secret')
