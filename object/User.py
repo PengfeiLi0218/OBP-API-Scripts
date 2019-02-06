@@ -22,7 +22,7 @@ class User:
         session = OAuth1Session(
             settings.OAUTH_CONSUMER_KEY,
             client_secret=settings.OAUTH_CONSUMER_SECRET,
-            callback_uri=settings.LOGIN_AGENT_URL +settings.OAUTH_AUTHORIZATION_PATH,
+            callback_uri=settings.REDIRECT_URL +settings.OAUTH_AUTHORIZATION_PATH,
         )
 
         url = settings.API_HOST + settings.OAUTH_TOKEN_PATH
