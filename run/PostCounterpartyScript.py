@@ -15,7 +15,7 @@ if __name__ == "__main__":
     for user_dict in json_object_user['users']:
         user = User(user_dict['user_name'], user_dict['password'], user_dict['email'])
         print("login as user: ")
-        session = user.oauth_login()
+        session = user.direct_login()
         print("get users private accounts")
         private_account = user.get_user_private_account()
         account_list = json.loads(private_account)['accounts']

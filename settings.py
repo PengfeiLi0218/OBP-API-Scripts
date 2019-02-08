@@ -11,6 +11,8 @@ OAUTH_TOKEN_PATH = '/oauth/initiate'
 OAUTH_AUTHORIZATION_PATH = '/oauth/authorize'
 OAUTH_ACCESS_TOKEN_PATH = '/oauth/token'
 
+DIRECTLOGIN_PATH = '/my/logins/direct'
+
 ADMIN_USERNAME = "pflee"
 ADMIN_PASSWORD = "Pflee@0218"
 

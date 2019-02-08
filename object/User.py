@@ -4,6 +4,7 @@ import re
 import settings
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+import requests
 
 class User:
     def __init__(self, user_name, password, email=None):
@@ -70,6 +71,30 @@ class User:
         self.access_token = response.get('oauth_token')
         self.access_secret = response.get('oauth_token_secret')
         print("access_token: {}\naccess_secret: {}".format(self.access_token, self.access_secret))
+
+        return self.session
+
+    def direct_login(self):
+        url = settings.API_HOST + settings.DIRECTLOGIN_PATH
+        authorization = 'DirectLogin username="{}",password="{}",consumer_key="{}"'.format(  # noqa
+            self.user_name,
+            self.password,
+            settings.OAUTH_CONSUMER_KEY)
+        headers = {'Authorization': authorization}
+
+        self.session = None
+        try:
+            response = requests.post(url, headers=headers)
+            result = response.json()
+            if response.status_code != 201:
+                print("Login failed!!!")
+            else:
+                token = result['token']
+                headers = {'Authorization': 'DirectLogin token={}'.format(token)}
+                self.session = requests.Session()
+                self.session.headers.update(headers)
+        except requests.exceptions.ConnectionError as err:
+            print("Login failed!!!")
 
         return self.session
 
