@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "user_name": "super.user.1",
+      "password": "X!16a99a4e",
+      "email": "super.user.1@x.y"
+    },
+    {
+      "user_name": "super.user.2",
+      "password": "X!8bd5ad03",
+      "email": "super.user.2@x.y"
+    },
+    {
+      "user_name": "super.user.3",
+      "password": "X!fd32256a",
+      "email": "super.user.3@x.y"
+    },
+    {
+      "user_name": "super.user.4",
+      "password": "X!fd9f36a7",
+      "email": "super.user.4@x.y"
+    },
+    {
+      "user_name": "super.user.5",
+      "password": "X!b0362f35",
+      "email": "super.user.5@x.y"
+    },
+    {
+      "user_name": "super.user.6",
+      "password": "X!2aa5f9a2",
+      "email": "super.user.6@x.y"
+    },
+    {
+      "user_name": "super.user.7",
+      "password": "X!038fbe24",
+      "email": "super.user.7@x.y"
+    },
+    {
+      "user_name": "super.user.8",
+      "password": "X!bbe98532",
+      "email": "super.user.8@x.y"
+    },
+    {
+      "user_name": "super.user.9",
+      "password": "X!5d064260",
+      "email": "super.user.9@x.y"
+    },
+    {
+      "user_name": "super.user.10",
+      "password": "X!80258f24",
+      "email": "super.user.10@x.y"
+    }
+  ]
+}

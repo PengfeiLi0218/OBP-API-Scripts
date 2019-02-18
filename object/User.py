@@ -11,6 +11,9 @@ class User:
         self.user_name = user_name
         self.password= password
         self.email = email
+        name_array = user_name.split('.')
+        self.first_name =name_array[0]
+        self.last_name ='.'.join(name_array[1:]) if len(name_array)>1 else ''
 
     @staticmethod
     def load(path):
@@ -127,3 +130,45 @@ class User:
 
     def oauth_logout(self):
         pass
+
+    def to_json(self):
+        return {
+            "email":self.email,
+            "username":self.user_name,
+            "password":self.password,
+            "first_name":self.first_name,
+            "last_name":self.last_name
+        }
+
+    def create_user(self, user):
+        url = settings.API_HOST + "/obp/v2.0.0/users"
+        result = self.session.request('POST', url, json=user.to_json(), verify=settings.VERIFY)
+        if result.status_code == 201:
+            print("saved {} as users".format(user.user_name))
+            user_id = json.loads(result.text)['user_id']
+            return True, user_id
+        elif result.status_code == 409 and json.loads(result.text)['message']=='User with the same username already exists.':
+            print("{} already exists".format(user.user_name))
+            url = settings.API_HOST + "/obp/v3.0.0/users/username/{}".format(user.user_name)
+            result = self.session.request('GET', url, verify=settings.VERIFY)
+            user_id = json.loads(result.text)['user_id']
+            return True, user_id
+        else:
+            print("did NOT save customer {}".format(
+                result.content if result is not None and result.content is not None else ""))
+            return False, None
+
+    def addRole(self, user_id, role, bank_id=""):
+        url = settings.API_HOST + "/obp/v2.0.0/users/{}/entitlements".format(user_id)
+        entitlement = {
+            "bank_id": bank_id,
+            "role_name": role
+        }
+        result = self.session.request('POST', url, json=entitlement, verify=settings.VERIFY)
+        if result.status_code == 201:
+            print("add {} to {} {}".format(role, user_id, bank_id))
+            return True
+        else:
+            print("did NOT save entitlement {}".format(
+                result.content if result is not None and result.content is not None else ""))
+            return False
