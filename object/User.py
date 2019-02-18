@@ -169,6 +169,6 @@ class User:
             print("add {} to {} {}".format(role, user_id, bank_id))
             return True
         else:
-            print("did NOT save entitlement {}".format(
+            print("did NOT save {} entitlement {}".format(role,
                 result.content if result is not None and result.content is not None else ""))
             return False
