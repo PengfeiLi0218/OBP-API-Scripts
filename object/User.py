@@ -111,13 +111,7 @@ class User:
 
     def get_user_other_account(self, bank_id, account_id, view_id):
 
-        session = OAuth1Session(
-            settings.OAUTH_CONSUMER_KEY,
-            settings.OAUTH_CONSUMER_SECRET,
-            resource_owner_key=self.access_token,
-            resource_owner_secret=self.access_secret,
-        )
-        result = session.get(
+        result = self.session.get(
             settings.API_HOST+"/obp/v3.1.0/banks/"+bank_id+"/accounts/"+account_id+"/"+view_id+"/other_accounts")
 
         if result.status_code==200:

@@ -6,11 +6,11 @@ from object.PostCounterparty import PostCounterparty
 from object.User import User
 
 if __name__ == "__main__":
-    json_object_counterparty= PostCounterparty.load(settings.FILE_ROOT+"OBP_sandbox_counterparties_pretty.json")
+    json_object_counterparty= PostCounterparty.load(settings.FILE_ROOT+"OBP_sandbox_counterparties_pretty_2.json")
 
     counterparty_list = [val for sublist in json_object_counterparty for val in sublist]
 
-    json_object_user=User.load(settings.FILE_ROOT+"OBP_sandbox_pretty.json")
+    json_object_user=User.load(settings.FILE_ROOT+"OBP_sandbox_pretty_2.json")
 
     for user_dict in json_object_user['users']:
         user = User(user_dict['user_name'], user_dict['password'], user_dict['email'])

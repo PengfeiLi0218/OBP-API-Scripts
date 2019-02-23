@@ -8,7 +8,7 @@ if __name__ == "__main__":
     adminUserUsername = settings.ADMIN_USERNAME
     adminPassword = settings.ADMIN_PASSWORD
 
-    json_customers = PostCustomer.load(settings.FILE_ROOT+"OBP_sandbox_customers_pretty.json")
+    json_customers = PostCustomer.load(settings.FILE_ROOT+"OBP_sandbox_customers_pretty_2.json")
 
     print("Got {} records".format(len(json_customers)))
 
@@ -30,12 +30,12 @@ if __name__ == "__main__":
                                   customer['credit_limit']
                                  ) for customer in json_customers]
 
-    json_user = User.load(settings.FILE_ROOT+"OBP_sandbox_pretty.json")
+    json_user = User.load(settings.FILE_ROOT+"OBP_sandbox_pretty_2.json")
     print("Got {} users".format(len(json_user['users'])))
 
     print("login as user: ")
     admin_user = User(adminUserUsername, adminPassword)
-    session = admin_user.oauth_login()
+    session = admin_user.direct_login()
     print("ok!!!")
 
     print("Got {} banks".format(len(json_user['banks'])))
